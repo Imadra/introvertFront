@@ -35,7 +35,7 @@ class IndexRouter extends React.Component{
             return (
                 <div className='fff'>
                     <Router history={hashHistory}>
-                        <Route path="/dashboard" component={Dashboard}/>
+                        <Route path="/dashboard" component={() => <Dashboard history={hashHistory} />}/>
                         <Route path="/" component={Home} />
                         <Route path="/*" component={() => {hashHistory.push('/dashboard'); return Dashboard; }} />
                     </Router>
