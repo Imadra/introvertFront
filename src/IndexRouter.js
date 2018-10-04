@@ -14,7 +14,7 @@ class IndexRouter extends React.Component{
     
     constructor(props){
         super(props);
-        this.state={authorized: null};
+        this.state={authorized: true};
     }
     componentWillMount(){
       // axios.get('/api/check',{
@@ -22,7 +22,7 @@ class IndexRouter extends React.Component{
       //     this.setState({authorized: res.data});
       // });
 
-      setTimeout(() => {this.setState({authorized: true})} , 3000);
+      // setTimeout(() => {this.setState({authorized: true})} , 3000);
     }
 
     signin(){
@@ -37,7 +37,7 @@ class IndexRouter extends React.Component{
                     <Router history={hashHistory}>
                         <Route path="/dashboard" component={Dashboard}/>
                         <Route path="/" component={Home} />
-                        <Route exact path="/*" render={() => <Redirect to='/dashboard' />} />
+                        <Route path="/*" component={() => {hashHistory.push('/dashboard'); return Dashboard; }} />
                     </Router>
                 </div>
             );
@@ -47,7 +47,7 @@ class IndexRouter extends React.Component{
                     <Router history={hashHistory}>
                         <Route path="/signin" component={()=> <SignIn signin={this.signin.bind(self)} />} /> 
                         <Route path="/" component={Home} />
-                        <Route path="/*" component={() => <Redirect to='/home' />} />
+                        <Route path="/*" component={() => {hashHistory.push('/'); return Home; }} />
                     </Router>
                 </div>
             );
